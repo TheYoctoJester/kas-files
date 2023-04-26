@@ -1,0 +1,28 @@
+header:
+  version: 13
+
+distro: poky
+
+repos:
+  poky:
+    url: http://git.yoctoproject.org/poky
+    refspec: kirkstone
+    layers:
+      meta:
+      meta-poky:
+      meta-yocto-bsp:
+
+  meta-openembedded:
+    url: https://git.openembedded.org/meta-openembedded
+    refspec: kirkstone
+    layers:
+      meta-oe:
+
+local_conf_header:
+  base: |
+    CONF_VERSION = "2"
+    PACKAGE_CLASSES = "package_ipk"
+    INIT_MANAGER = "systemd"
+
+target:
+  - core-image-minimal
