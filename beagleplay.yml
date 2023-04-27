@@ -1,0 +1,20 @@
+header:
+  version: 13
+  includes:
+  - kirkstone-base.yml
+
+repos:
+  meta-ti:
+    url: http://git.yoctoproject.org/meta-ti
+    refspec: kirkstone
+    layers:
+      meta-ti-bsp:
+
+  meta-arm:
+    url: http://git.yoctoproject.org/meta-arm
+    refspec: kirkstone
+    layers:
+      meta-arm:
+      meta-arm-toolchain:
+
+machine: beagleplay

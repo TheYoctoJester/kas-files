@@ -1,0 +1,29 @@
+header:
+  version: 13
+  includes:
+  - beaglebone-ai64.yml
+
+repos:
+  meta-mender:
+    url: https://github.com/mendersoftware/meta-mender
+    refspec: kirkstone
+    layers:
+      meta-mender-core:
+      meta-mender-demo:
+
+local_conf_header:
+  mender: |
+    MENDER_ARTIFACT_NAME = "bp1"
+    INHERIT += "mender-full"
+    MENDER_FEATURES_ENABLE:append = " mender-image-sd"
+    MENDER_FEATURES_DISABLE:append = "mender-image-uefi"
+    MENDER_STORAGE_DEVICE = "/dev/mmcblk1"
+    # these two settings replicate the wks set up from meta-ti
+    MENDER_BOOT_PART_SIZE_MB = "128"
+    MENDER_PARTITION_ALIGNMENT = "1048576"
+    # remove image types that we do not need
+    # attention: sdimg.bmap seems to not work correctly.
+    # in order to avoid accidential usage, not building it
+    IMAGE_FSTYPES:remove = "wic wic.bmap mender.bmap sdimg.bmap"
+
+machine: beaglebone-ai64
